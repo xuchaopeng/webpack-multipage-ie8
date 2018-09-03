@@ -6,7 +6,7 @@ webpackConfig.module.rules = [
 	...webpackConfig.module.rules,
 	{
 		test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
-		loader: 'file-loader'
+		loader: 'url-loader?limit=8192'
 	},
 	{
 		test: /\.css|less$/,

@@ -41,12 +41,13 @@ webpackConfig.module.rules = [...webpackConfig.module.rules,
 					}
 				}
 			],
-			fallback: 'style-loader'
+			fallback: 'style-loader',
+			publicPath: '../'
 		})
 	},
 	{
 		test: /\.(jpg|png|gif)$/,
-		loader: 'file-loader?name=images/[name].[ext]'
+		loader: 'url-loader?limit=8192&name=images/[name].[ext]'
 	},
 	{
 		test: /\.(eot|svg|ttf|woff|woff2)$/,
