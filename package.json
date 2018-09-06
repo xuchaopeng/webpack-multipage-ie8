@@ -8,23 +8,6 @@
     "eslint": "eslint --color --ext .js ./",
     "esfix": "eslint --color --fix --ext .js ./"
   },
-  "lint-staged": {
-    "src/**/*.js": [
-      "prettier --config .prettierrc --write",
-      "eslint",
-      "git add"
-    ],
-    "src/**/*.ts": [
-      "prettier --config .prettierrc --write",
-      "tslint",
-      "git add"
-    ],
-    "src/**/*.css": [
-      "prettier --config .prettierrc --write",
-      "stylelint",
-      "git add"
-    ]
-  },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.40",
     "@babel/core": "7.0.0-beta.40",
@@ -39,6 +22,7 @@
     "babel-loader": "8.0.0-beta.0",
     "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
     "babel-plugin-transform-es3-property-literals": "6.22.0",
+    "babel-polyfill": "^6.26.0",
     "compression-webpack-plugin": "^1.1.11",
     "cross-env": "5.1.3",
     "css-loader": "0.28.8",
@@ -52,6 +36,7 @@
     "eslint-plugin-standard": "3.0.1",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.6",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "3.0.4",
     "husky": "0.14.3",
     "json-loader": "0.5.7",

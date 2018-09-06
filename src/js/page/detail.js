@@ -1,1 +1,0 @@
-document.body.innerHTML = '<h2>详情页</h2>'

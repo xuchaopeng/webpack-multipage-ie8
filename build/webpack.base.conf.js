@@ -92,6 +92,7 @@ webpackConfig.entry['common'] = [
 	'static/css/reset.css'
 ];
 webpackConfig.entry['es5-polyfill'] = 'es5-polyfill';
+webpackConfig.entry['babel-polyfill'] = 'babel-polyfill';
 webpackConfig.entry = merge(webpackConfig.entry, entries);
 
 module.exports = webpackConfig
