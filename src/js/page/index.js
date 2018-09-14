@@ -1,7 +1,7 @@
 // var { arr } = require('../common/test')
 // import { arr } from '../common/test'
 
-import 'less/index.less';
+import 'style/index.less';
 import test, { datalist } from '../common/test'
 
 
@@ -33,6 +33,7 @@ const index = {
 				'background': '#fff'
 			})
 			.on('click', e => {
+				var s = Date.now();
 				import(/* webpackChunkName: "login" */ '../common/login.js')
 				.then(module => {
 					if(!_this.login) {
@@ -40,6 +41,7 @@ const index = {
 					}
 					_this.login.show({
 						onShow: () => {
+							console.log(Date.now() - s);
 							console.log('显示登录弹窗');
 						},
 						onHide: () => {
@@ -61,7 +63,6 @@ const index = {
 		})
 
 	},
-
 }
 
 index.init();

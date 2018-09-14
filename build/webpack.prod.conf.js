@@ -56,6 +56,7 @@ webpackConfig.module.rules = [...webpackConfig.module.rules,
 ]
 
 
+
 webpackConfig.plugins = [...webpackConfig.plugins,
 	extractStyle,
 	new webpack.optimize.UglifyJsPlugin({
@@ -76,6 +77,7 @@ webpackConfig.plugins = [...webpackConfig.plugins,
 		},
 		comments: false
 	}),
+
 	new DefinePlugin({
 		'process.env': env
 	})

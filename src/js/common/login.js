@@ -1,4 +1,4 @@
-import 'less/login.less';
+import 'style/login.less';
 
 const LOGIN_HTML = `<div class="login-wrap" id="login-panel">
 		<div class="login-panel">
