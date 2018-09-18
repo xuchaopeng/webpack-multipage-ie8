@@ -58,6 +58,14 @@ const webpackConfig = {
 				}
 			]
 		}, {
+			test: /\.html$/,
+			exclude: /node_modules/,
+			loader: 'underscore-template-loader',
+			query: {
+				prependFilenameComment: __dirname,
+				strict: false
+			}
+		}, {
 			test: /\.tpl|ejs$/,
 			exclude: /node_modules/,
 			loader: 'ejs-loader'
@@ -82,8 +90,8 @@ Object.keys(entries).forEach(function(name, epath) {
 		chunks: ['common', name],
 		hash: true,
 		cache: true,
-		// template: './src/html/'+ name + '.html',
-		template: './src/html/'+name+'.js',
+		template: './src/html/'+ name + '.html',
+		// template: './src/html/'+name+'.js',
 		minify: {
 			removeComments: true,
 			collapseWhitespace: true,

@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>webpack</title>
+	<title><% if (typeof title !== 'undefined') { %>
+		<%= title %>
+	<% } else { %> 默认标题 <% } %></title>
 	<!--[if IE 8]><script type="text/javascript" src="js/es5-polyfill.js"></script>
 	<script type="text/javascript" src="js/babel-polyfill.js"></script><![endif]-->
+	<% if (typeof head !== 'undefined') { %>
+		<%= head %>
+	<% } %>
 </head>
 <body>
 	<div class="header-wrap">
