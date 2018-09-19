@@ -1,68 +1,64 @@
 // var { arr } = require('../common/test')
 // import { arr } from '../common/test'
 
-import 'style/index.less';
-import test, { datalist } from '../common/test'
+import 'style/page/index.less';
+import test, { datalist } from 'common/test';
 
+import 'common/header.js';
 
+import J from 'utils/jsonp';
+import riot from 'riot';
+
+console.log(riot);
+
+console.log('--------------------------test-------------------------------');
 console.log($.fn.jquery);
-
 console.log(test.str);
 console.log(datalist);
+console.log('--------------------------test-------------------------------');
+
+
+
+import '../riot/todo.tag';
+
+riot.mount('todo', { first: 'first', last: 'last' })
 
 const index = {
-	login: null,
-
 	init: function() {
-		this.interActive();
+		this.getNewsList();
 	},
 
-	interActive: function() {
-		let _this = this;
-
-		datalist && datalist.length && datalist.forEach(item => $('.list').append(`<p>- ${item}</p>`))
-
-		$('.index')
-			.html('<button>点击登录</button>')
-			.children('button')
-			.css({
-				'font-size': 14,
-				'padding': '5px 20px',
-				'border': '1px solid #ddd',
-				'margin': 20,
-				'background': '#fff'
-			})
-			.on('click', e => {
-				var s = Date.now();
-				import(/* webpackChunkName: "login" */ '../common/login.js')
-				.then(module => {
-					if(!_this.login) {
-						_this.login = new module.default();
-					}
-					_this.login.show({
-						onShow: () => {
-							console.log(Date.now() - s);
-							console.log('显示登录弹窗');
-						},
-						onHide: () => {
-							console.log('关闭登录弹窗');
-						},
-						onSuccess: d => {
-							console.log(d);
-							console.log('登录成功');
-						}
-					});
-				})
-				.catch(err => {
-					alert(err)
-				})
-			})
-
-		$('h3').on('click', () => {
-			console.log(_this.login);
+	getNewsList: function() {
+		J('https://pcflow.dftoutiao.com/toutiaopc_jrtt/newspool', {
+			params: {
+				type: 'toutiao',
+				startkey: null,
+				newkey: '|',
+				pgnum: 2,
+				pageSize: 50,
+				uid: '15373237235528933',
+				qid: 'jrttnull',
+				position: '%E4%B8%8A%E6%B5%B7',
+				domain: 'kktt',
+				sclog: 1,
+			},
+			timeout: 8000
+		}).then( res => {
+			if(res.data) {
+				for (let i = 0, len= res.data.length; i < len; i++) {
+					let item = res.data[i];
+					$('#newspool').append(`
+						<div class="item">
+							<h2>${item.topic}</h2>
+						</div>	
+					`)
+				}
+			}
 		})
-
-	},
+		.catch(error => {
+			console.error(error)
+		})
+	}
 }
 
 index.init();

@@ -33,9 +33,11 @@ const webpackConfig = {
 		alias: {
 			static: path.join(__dirname, '../static'),
 			assets: path.join(__dirname, '../src/assets'),
-			components: path.join(__dirname, '../src/components'),
+			templates: path.join(__dirname, '../src/templates'),
 			page: path.join(__dirname, '../src/js/page'),
 			common: path.join(__dirname, '../src/js/common'),
+			utils: path.join(__dirname, '../src/js/utils'),
+			components: path.join(__dirname, '../src/js/components'),
 			style: path.join(__dirname, '../src/style'),
 			images: path.join(__dirname, '../src/images'),
 			html: path.join(__dirname, '../src/html')
@@ -46,6 +48,10 @@ const webpackConfig = {
 			test: /\.js?$/,
 			exclude: /node_modules/,
 			loader: 'babel-loader'
+		}, {
+			test: /\.tag$/,
+			exclude: /node_modules/,
+			loader: 'riotjs-loader'
 		}, {
 			test: /\.ts?$/,
 			exclude: /node_modules/,
@@ -73,7 +79,7 @@ const webpackConfig = {
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
-			name: 'common',
+			name: 'vendor',
 			// filename: 'js/[name].js',
 			minChunks: 3,
 			chunks: Object.keys(entries),   // 只提取page下的js公共部分
@@ -87,7 +93,7 @@ Object.keys(entries).forEach(function(name, epath) {
 	const plugin = new HtmlWebpackPlugin({
 		filename: name + '.html',
 		inject: true,
-		chunks: ['common', name],
+		chunks: ['common', 'vendor', name],
 		hash: true,
 		cache: true,
 		template: './src/html/'+ name + '.html',
@@ -109,11 +115,10 @@ Object.keys(entries).forEach(function(name, epath) {
 	webpackConfig.plugins.push(plugin);
 })
 
-// 提取公共css或其他文件
+// 提取公共css或js文件
 webpackConfig.entry['common'] = [
-	'style/reset.css'
+	'style/common/reset.css'
 ];
-
 webpackConfig.entry['es5-polyfill'] = 'es5-polyfill';
 webpackConfig.entry['babel-polyfill'] = 'babel-polyfill';
 webpackConfig.entry = merge(webpackConfig.entry, entries);

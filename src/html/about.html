@@ -1,4 +1,17 @@
-@require('./components/header.html', { "name": "about" })
-关于
+<!-- 顶部head标签插入标题meta js等 -->
+@require('./templates/head.html', { "title": "关于", "head": "<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>" })
 
-@require('./components/footer.html')
+<!-- 顶部 -->
+@require('./templates/header.html', { "name": "about" })
+
+
+<div class="wrap-content clearfix">
+	关于
+</div>
+
+
+<!-- 底部 -->
+@require('./templates/footer.html')
+
+<!-- 底部插入js或其他信息 -->
+@require('./templates/foot.html')
