@@ -79,7 +79,7 @@ const webpackConfig = {
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendor',
+			name: 'vendors',
 			// filename: 'js/[name].js',
 			minChunks: 3,
 			chunks: Object.keys(entries),   // 只提取page下的js公共部分
@@ -93,7 +93,7 @@ Object.keys(entries).forEach(function(name, epath) {
 	const plugin = new HtmlWebpackPlugin({
 		filename: name + '.html',
 		inject: true,
-		chunks: ['common', 'vendor', name],
+		chunks: ['common', 'vendors', name],
 		hash: true,
 		cache: true,
 		template: './src/html/'+ name + '.html',
@@ -119,8 +119,8 @@ Object.keys(entries).forEach(function(name, epath) {
 webpackConfig.entry['common'] = [
 	'style/common/reset.css'
 ];
-webpackConfig.entry['es5-polyfill'] = 'es5-polyfill';
+
 webpackConfig.entry['babel-polyfill'] = 'babel-polyfill';
 webpackConfig.entry = merge(webpackConfig.entry, entries);
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

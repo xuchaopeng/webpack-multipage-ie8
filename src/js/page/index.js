@@ -7,9 +7,7 @@ import test, { datalist } from 'common/test';
 import 'common/header.js';
 
 import J from 'utils/jsonp';
-import riot from 'riot';
 
-console.log(riot);
 
 console.log('--------------------------test-------------------------------');
 console.log($.fn.jquery);
@@ -18,10 +16,10 @@ console.log(datalist);
 console.log('--------------------------test-------------------------------');
 
 
-
-import '../riot/todo.tag';
-
-riot.mount('todo', { first: 'first', last: 'last' })
+// import riot from 'riot';
+// console.log(riot);
+// import '../riot/todo.tag';
+// riot.mount('todo', { first: 'first', last: 'last' })
 
 const index = {
 	init: function() {
