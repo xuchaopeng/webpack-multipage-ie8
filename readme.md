@@ -1,9 +1,9 @@
 # webpack-multipage-ie8
-> ### 使用webpack开发兼容ie8的多页面应用
+> #### 使用webpack开发兼容ie8的多页面应用
 
-[![jquery](https://img.shields.io/badge/jquery-1.8.3-blue.svg?style=flat-square)]()
-[![webpack](https://img.shields.io/badge/webpack-^3.x-green.svg?style=flat-square)]()
-[![riot](https://img.shields.io/badge/riot-2.2.4-red.svg?style=flat-square)]()
+![jquery](https://img.shields.io/badge/jquery-1.8.3-blue.svg?style=flat-square)
+![webpack](https://img.shields.io/badge/webpack-^3.x-green.svg?style=flat-square)
+![riot](https://img.shields.io/badge/riot-2.2.4-red.svg?style=flat-square)
 
 ## 相关工具库
 - `jquery` 兼容ie8须使用1.8.3及以下版本，且通过script标签引入
