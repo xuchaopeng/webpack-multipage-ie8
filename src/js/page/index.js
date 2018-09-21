@@ -16,10 +16,9 @@ console.log(datalist);
 console.log('--------------------------test-------------------------------');
 
 
-// import riot from 'riot';
-// console.log(riot);
-// import '../riot/todo.tag';
-// riot.mount('todo', { first: 'first', last: 'last' })
+console.log(riot);
+import '../riot/todo.tag';
+riot.mount('todo', { first: 'first', last: 'last' })
 
 const index = {
 	init: function() {

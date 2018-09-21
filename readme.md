@@ -18,7 +18,7 @@
 - [x] 项目开发支持promise等es6语法, 支持export\module.exports, import\require导出导入
 - [x] 代码切割, 支持import动态加载js\css等模块, 节省首次加载文件体积
 - [x] html模板化, 支持模板引用传参
-- [ ] 引入MVP框架riotjs, 兼容ie8
+- [x] 引入MVP框架riotjs, 兼容ie8
 - [ ] 入口js文件和html文件可配置化
 
 ## 开发构建
