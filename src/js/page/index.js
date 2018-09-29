@@ -8,13 +8,11 @@ import 'common/header.js';
 
 import J from 'utils/jsonp';
 
-
 // console.log('--------------------------test-------------------------------');
 // console.log($.fn.jquery);
 // console.log(test.str);
 // console.log(datalist);
 // console.log('--------------------------test-------------------------------');
-
 
 import riot from 'riot';
 import '../riot/xcp.tag';

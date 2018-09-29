@@ -4,19 +4,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const merge = require('webpack-merge')
 
-// 获取所有入口文件
-const glob = require('glob');
-const getEntry = globPath => {
-	const entries = {};
+let entries = require('../config/page.js');
 
-	glob.sync(globPath).forEach(function(entry) {
-		const basename = path.basename(entry, path.extname(entry));
-		entries[basename] = entry;
-	});
-	return entries;
+// 如果没有配置文件打包入口配置则遍历入口文件
+if(!entries || !entries.length) {
+	// 获取所有入口文件
+	const glob = require('glob');
+	const getEntry = globPath => {
+		const entries = [];
+
+		glob.sync(globPath).forEach(function(entry) {
+			const basename = path.basename(entry, path.extname(entry));
+			entries.push({
+				'name': basename,
+				'entry': entry,
+				'template': './src/html/'+basename+'.html',
+				'outputHtmlname': basename,
+			})
+		});
+		return entries;
+	}
+	entries = getEntry('./src/js/page/**.js');
 }
-
-const entries = getEntry('./src/js/page/**.js');
 
 const webpackConfig = {
 	entry: {},
@@ -78,25 +87,28 @@ const webpackConfig = {
 		}]
 	},
 	plugins: [
+		new webpack.ProvidePlugin({
+			'riot': 'riot',
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendors',
 			// filename: 'js/[name].js',
 			minChunks: 3,
-			chunks: Object.keys(entries),   // 只提取page下的js公共部分
+			chunks: entries.map(e => e.name),   // 提取入口文件的公共部分
 		}),
 		new NamedModulesPlugin()
 	]
 }
 
-
-Object.keys(entries).forEach(function(name, epath) {
+var entryJs = {};
+entries.forEach(function(item) {
 	const plugin = new HtmlWebpackPlugin({
-		filename: name + '.html',
+		filename: item.outputHtmlname + '.html',
 		inject: true,
-		chunks: ['common', 'vendors', name],
+		chunks: ['common', 'vendors', item.name],
 		hash: true,
 		cache: true,
-		template: './src/html/'+ name + '.html',
+		template: item.template,
 		// template: './src/html/'+name+'.js',
 		minify: {
 			removeComments: true,
@@ -113,6 +125,7 @@ Object.keys(entries).forEach(function(name, epath) {
 		chunksSortMode: 'manual'
 	});
 	webpackConfig.plugins.push(plugin);
+	entryJs[item.name] = item.entry;
 })
 
 // 提取公共css或js文件
@@ -121,6 +134,8 @@ webpackConfig.entry['common'] = [
 ];
 
 webpackConfig.entry['babel-polyfill'] = 'babel-polyfill';
-webpackConfig.entry = merge(webpackConfig.entry, entries);
+
+
+webpackConfig.entry = merge(webpackConfig.entry, entryJs);
 
 module.exports = webpackConfig;
