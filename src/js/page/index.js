@@ -9,23 +9,22 @@ import 'common/header.js';
 import J from 'utils/jsonp';
 
 
-console.log('--------------------------test-------------------------------');
-console.log($.fn.jquery);
-console.log(test.str);
-console.log(datalist);
-console.log('--------------------------test-------------------------------');
+// console.log('--------------------------test-------------------------------');
+// console.log($.fn.jquery);
+// console.log(test.str);
+// console.log(datalist);
+// console.log('--------------------------test-------------------------------');
 
 
-// import riot from 'riot';
-// console.log(riot);
-// import '../riot/todo.tag';
-// riot.mount('todo', { first: 'first', last: 'last' })
-
+import riot from 'riot';
+import '../riot/xcp.tag';
+// riot.mount('todo',{title:'3222',first:'12412'})
+riot.mount('my-tag',{title:'xcvsfsd'});
+console.log(riot.mount('*'));
 const index = {
 	init: function() {
 		this.getNewsList();
 	},
-
 	getNewsList: function() {
 		J('https://pcflow.dftoutiao.com/toutiaopc_jrtt/newspool', {
 			params: {
